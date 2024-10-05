@@ -54,7 +54,9 @@ class _AddressState extends State<Address> {
             TextField(
               controller: _controller,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
                 labelText: 'Enter your address',
               ),
             ),

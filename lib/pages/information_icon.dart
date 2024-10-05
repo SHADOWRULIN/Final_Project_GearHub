@@ -1,3 +1,4 @@
+import 'package:final_project/global/common/toast.dart';
 import 'package:final_project/pages/address.dart';
 import 'package:final_project/pages/checkout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +8,7 @@ import 'login_page.dart';
 
 class Information extends StatelessWidget {
   const Information({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +20,16 @@ class Information extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Text(
+            "Information",
+            style: TextStyle(
+                fontSize: 30,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
           InkWell(
             onTap: () {
               Get.to(const Address());
@@ -166,6 +177,7 @@ class LogOut extends StatelessWidget {
                     onPressed: () {
                       FirebaseAuth.instance.signOut();
                       Get.offAll(const LoginPage());
+                      showToast(message:("User is successfully logged out"),);
                     },
                     child: const Text(
                       "Log out",

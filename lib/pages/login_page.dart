@@ -1,10 +1,11 @@
 // import 'package:final_project/app_routes.dart';
 import 'package:final_project/firebase_auth/firebase_auth_services.dart';
+import 'package:final_project/global/common/toast.dart';
+import 'package:final_project/pages/create_acc.dart';
 import 'package:final_project/pages/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:async';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,9 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
   bool _isSignIn = false;
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -28,9 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  
-
-  Future<void> _signIn() async {
+  void _signIn() async {
     setState(() {
       _isSignIn = true;
     });
@@ -39,16 +38,17 @@ class _LoginPageState extends State<LoginPage> {
     String password = _passwordController.text;
 
     User? user = await _auth.signInWithEmailAndPassword(email, password);
-    if (user != null) {
-      print("User is successfully logged in");
-      Get.offAll(HomeScreen());
-    } else {
-      print("Some error happened");
-    }
 
     setState(() {
       _isSignIn = false;
     });
+
+    if (user != null) {
+      showToast(message: ("User successfully logged in"));
+      Get.offAll(const HomeScreen());
+    } else {
+      showToast(message: ("Some error happened"));
+    }
   }
 
   @override
@@ -109,15 +109,21 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType: TextInputType.visiblePassword,
               controller: _passwordController,
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 10, left: 200),
-              child: Text(
-                "Forget your password?",
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w200,
-                    color: Colors.black),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10, left: 200),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(const ForgotPassword());
+                },
+                child: const Text(
+                  "Forget your password?",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w100,
+                    color: Color(0xff374951),
+                    decoration: TextDecoration.underline,
+                  ),
+                )),
             ),
             SizedBox(
               width: 100,
@@ -126,10 +132,15 @@ class _LoginPageState extends State<LoginPage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xffF4C331)),
                   onPressed: _signIn,
-                  child: const Text(
-                    "Log In",
-                    style: TextStyle(color: Color(0xff000000), fontSize: 18),
-                  )),
+                  child: _isSignIn
+                      ? const CircularProgressIndicator(
+                          color: Colors.black,
+                        )
+                      : const Text(
+                          "Log In",
+                          style:
+                              TextStyle(color: Color(0xff000000), fontSize: 18),
+                        )),
             ),
             const SizedBox(
               height: 30,
@@ -147,10 +158,6 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: TextDecoration.underline,
                   ),
                 )),
-                if (_isSignIn)
-            const Center(
-              child: CircularProgressIndicator(),
-            ),
           ],
         ),
       ),
@@ -158,27 +165,30 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class CreateAcc extends StatefulWidget {
-  const CreateAcc({super.key});
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({super.key});
 
   @override
-  State<CreateAcc> createState() => _CreateAccState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _CreateAccState extends State<CreateAcc> {
+class _ForgotPasswordState extends State<ForgotPassword> {
+  bool _isSignIn = false;
   final FirebaseAuthServices _auth = FirebaseAuthServices();
-  bool _obscureText = true;
+  final TextEditingController _emailController = TextEditingController();
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  void _forgotEmailLink() async {
+    setState(() {
+      _isSignIn = true;
+    });
 
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+    String email = _emailController.text;
+
+    await _auth.forgotPassword(email);
+
+    setState(() {
+      _isSignIn = false;
+    });
   }
 
   @override
@@ -195,7 +205,7 @@ class _CreateAccState extends State<CreateAcc> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Create Account",
+              "Forgot Password",
               style: TextStyle(
                   fontSize: 30,
                   color: Colors.black,
@@ -204,18 +214,14 @@ class _CreateAccState extends State<CreateAcc> {
             const SizedBox(
               height: 30,
             ),
-            TextField(
-              decoration: const InputDecoration(
-                  labelText: "Enter User Name",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  )),
-              keyboardType: TextInputType.emailAddress,
-              onSubmitted: (String value) {},
-              controller: _usernameController,
+            const Text(
+              "Enter Email to reset password link:",
+              style: TextStyle(
+                color: Colors.black,
+              ),
             ),
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
             TextField(
               decoration: const InputDecoration(
@@ -227,63 +233,22 @@ class _CreateAccState extends State<CreateAcc> {
               onSubmitted: (String value) {},
               controller: _emailController,
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Enter Password",
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                  child: Icon(
-                    _obscureText ? Icons.visibility_off : Icons.visibility,
-                    color: _obscureText == false ? Colors.blue : Colors.grey,
-                  ),
-                ),
-              ),
-              obscureText: _obscureText,
-              keyboardType: TextInputType.visiblePassword,
-              controller: _passwordController,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              width: 200,
-              height: 50,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xffF4C331)),
-                  onPressed: _signUp,
-                  child: const Text(
-                    "Create Account",
-                    style: TextStyle(color: Color(0xff000000), fontSize: 18),
-                  )),
-            ),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xffF4C331)),
+                onPressed: _forgotEmailLink,
+                child: _isSignIn
+                    ? const CircularProgressIndicator(
+                        color: Colors.black,
+                      )
+                    : const Text(
+                        "Log In",
+                        style:
+                            TextStyle(color: Color(0xff000000), fontSize: 18),
+                      )),
           ],
         ),
       ),
     );
-  }
-
-  void _signUp() async {
-    String userName = _usernameController.text;
-    String email = _emailController.text;
-    String password = _passwordController.text;
-
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
-    if (user != null) {
-      print("user is successfully created");
-      Get.offAll(HomeScreen());
-    } else {
-      print("Some error happend");
-    }
   }
 }

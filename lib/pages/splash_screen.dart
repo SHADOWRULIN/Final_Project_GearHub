@@ -22,6 +22,11 @@ class SplashScreen extends StatelessWidget {
                 width: 200,
                 height: 200,
               ),
+              const CircularProgressIndicator(
+                color: Colors.black,
+                strokeWidth: 5,
+                backgroundColor: Colors.white,
+              )
             ],
           ),
         ));
