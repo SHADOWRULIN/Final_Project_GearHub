@@ -1,5 +1,5 @@
-import 'package:final_project/address.dart';
-import 'package:final_project/checkout.dart';
+import 'package:final_project/pages/address.dart';
+import 'package:final_project/pages/checkout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

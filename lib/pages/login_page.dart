@@ -1,6 +1,6 @@
 // import 'package:final_project/app_routes.dart';
 import 'package:final_project/firebase_auth/firebase_auth_services.dart';
-import 'package:final_project/home_screen.dart';
+import 'package:final_project/pages/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

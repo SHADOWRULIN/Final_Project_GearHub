@@ -2,7 +2,7 @@ import 'information_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'cart.dart';
-import 'product_constructer.dart';
+import 'constructer/product_constructer.dart';
 import 'product_screen.dart';
 
 class HomeScreen extends StatefulWidget {

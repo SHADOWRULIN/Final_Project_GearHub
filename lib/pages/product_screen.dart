@@ -1,7 +1,7 @@
-import 'package:final_project/checkout.dart';
+import 'package:final_project/pages/checkout.dart';
 import 'package:flutter/material.dart';
 import 'information_icon.dart';
-import 'product_constructer.dart';
+import 'constructer/product_constructer.dart';
 import 'cart.dart';
 import 'package:get/get.dart';
 
