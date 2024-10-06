@@ -1,4 +1,3 @@
-// import 'package:final_project/app_routes.dart';
 import 'package:final_project/firebase_auth/firebase_auth_services.dart';
 import 'package:final_project/global/common/toast.dart';
 import 'package:final_project/pages/login_pages/create_acc.dart';

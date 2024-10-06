@@ -28,7 +28,7 @@ class ProductConstlist {
             "https://www.sefiles.net/images/library/large/santa-cruz-blur-cc-x0-axs-tr-reserve-iv-809602-1.png",
         name: "Santa Cruz Blur CC X0 AXS TR Reserve",
         price: 14000,
-        rating: 45),
+        rating: 4),
     Product(
         imageUrl:
             "https://www.sefiles.net/images/library/large/yeti-cycles-sb165-t2-float-x2-401282-11.jpg",

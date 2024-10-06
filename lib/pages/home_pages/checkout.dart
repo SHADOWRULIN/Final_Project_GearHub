@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../constructer/product_constructer.dart';
 import 'package:get/get.dart';
 import 'product_card.dart';
+import 'address.dart';
 
 class Checkout extends StatefulWidget {
   final Product cartProduct;
@@ -20,12 +21,28 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
-  bool? isChecked = true;
+  bool? isChecked = false;
+  bool? isChecked1 = false;
   double deliverCharges = 200;
   double completeTotal = 0;
 
   void total() {
     completeTotal = widget.total + deliverCharges;
+  }
+
+  dialog() {
+    Get.defaultDialog(
+      title: "Ohh No!",
+      middleText: "It's look like you don't have any address. Please add one.",
+      textConfirm: "Add Address",
+      textCancel: "Go Back",
+      onConfirm: () {
+        Get.to(const Address()); // Close the dialog
+      },
+      onCancel: () {
+        Get.back(); // Close the dialog
+      },
+    );
   }
 
   void confirmOrder() {
@@ -71,11 +88,15 @@ class _CheckoutState extends State<Checkout> {
             ),
             CheckboxListTile(
               title: const Text("Address from the Address Book"),
-              value: isChecked,
+              value: addresses.isEmpty ? false : isChecked,
               onChanged: (bool? value) {
-                setState(() {
-                  isChecked = value!;
-                });
+                if (addresses.isEmpty) {
+                  dialog();
+                } else {
+                  setState(() {
+                    isChecked = value!;
+                  });
+                }
               },
             ),
             const Text(
@@ -84,10 +105,10 @@ class _CheckoutState extends State<Checkout> {
             ),
             CheckboxListTile(
               title: const Text("Cash on delivery"),
-              value: isChecked,
+              value: isChecked1,
               onChanged: (bool? value) {
                 setState(() {
-                  isChecked = value!;
+                  isChecked1 = value!;
                 });
               },
             )
@@ -233,13 +254,13 @@ class Orders extends StatelessWidget {
               ),
               ProductConstlist.hasProduct
                   ? Expanded(
-                    child: Obx(() => ListView.builder(
-                          itemCount: orderController.orders.length,
-                          itemBuilder: (context, index) {
-                            return orderController.orders[index];
-                          },
-                        )),
-                  )
+                      child: Obx(() => ListView.builder(
+                            itemCount: orderController.orders.length,
+                            itemBuilder: (context, index) {
+                              return orderController.orders[index];
+                            },
+                          )),
+                    )
                   : const Center(
                       child: Text(
                         'No Orders Yet',

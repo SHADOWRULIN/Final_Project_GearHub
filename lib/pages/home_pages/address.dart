@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+final List<String> addresses = [];
+
 class Address extends StatefulWidget {
   const Address({super.key});
 
@@ -10,12 +12,11 @@ class Address extends StatefulWidget {
 
 class _AddressState extends State<Address> {
   final TextEditingController _controller = TextEditingController();
-  final List<String> _addresses = [];
 
   void _addAddress() {
     setState(() {
       if (_controller.text.isNotEmpty) {
-        _addresses.add(_controller.text);
+        addresses.add(_controller.text);
         _controller.clear();
       }
     });
@@ -23,7 +24,7 @@ class _AddressState extends State<Address> {
 
   void _removeAddress(int index) {
     setState(() {
-      _addresses.removeAt(index);
+      addresses.removeAt(index);
     });
   }
 
@@ -68,11 +69,11 @@ class _AddressState extends State<Address> {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: _addresses.length,
+                itemCount: addresses.length,
                 itemBuilder: (context, index) {
                   return Card(
                     child: ListTile(
-                      title: Text(_addresses[index]),
+                      title: Text(addresses[index]),
                       trailing: IconButton(
                         icon: const Icon(Icons.delete),
                         onPressed: () => _removeAddress(index),
