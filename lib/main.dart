@@ -1,5 +1,3 @@
-// import 'package:final_project/cart.dart';
-// import 'package:final_project/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

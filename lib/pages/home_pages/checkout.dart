@@ -1,7 +1,7 @@
-import 'package:final_project/pages/home_screen.dart';
+import 'package:final_project/pages/home_pages/home_screen.dart';
 import 'package:final_project/main.dart';
 import 'package:flutter/material.dart';
-import 'constructer/product_constructer.dart';
+import '../constructer/product_constructer.dart';
 import 'package:get/get.dart';
 import 'product_card.dart';
 

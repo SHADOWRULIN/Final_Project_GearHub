@@ -1,10 +1,10 @@
 import 'package:final_project/global/common/toast.dart';
-import 'package:final_project/pages/address.dart';
-import 'package:final_project/pages/checkout.dart';
+import 'package:final_project/pages/home_pages/address.dart';
+import 'package:final_project/pages/home_pages/checkout.dart';
+import 'package:final_project/pages/login_pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'login_page.dart';
 
 class Information extends StatelessWidget {
   const Information({super.key});

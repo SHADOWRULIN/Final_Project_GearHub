@@ -1,9 +1,10 @@
-import 'package:final_project/pages/checkout.dart';
+import 'package:final_project/pages/home_pages/checkout.dart';
 import 'package:flutter/material.dart';
 import 'information_icon.dart';
-import 'constructer/product_constructer.dart';
+import '../constructer/product_constructer.dart';
 import 'cart.dart';
 import 'package:get/get.dart';
+import 'circle_avatar.dart';
 
 class ProductScreen extends StatelessWidget {
   final Product product;
@@ -84,9 +85,7 @@ class ProductScreen extends StatelessWidget {
                   Text('Color',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  CircleAvatar(backgroundColor: Colors.red),
-                  CircleAvatar(backgroundColor: Colors.yellow),
-                  CircleAvatar(backgroundColor: Colors.black),
+                  ColorSelector(),
                 ],
               ),
               const SizedBox(height: 16),

@@ -1,5 +1,5 @@
-import 'package:final_project/pages/home_screen.dart';
-import 'package:final_project/pages/login_page.dart';
+import 'package:final_project/pages/home_pages/home_screen.dart';
+import 'package:final_project/pages/login_pages/login_page.dart';
 import 'package:final_project/pages/splash_screen.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';

@@ -1,3 +1,4 @@
+import 'package:final_project/pages/home_pages/circle_avatar.dart';
 import 'package:flutter/material.dart';
 
 Card cardStyle(String image, String name, double price, int quantity) {
@@ -31,6 +32,10 @@ Card cardStyle(String image, String name, double price, int quantity) {
                 Text(
                   "Rs. ${price.toString()}",
                   style: const TextStyle(fontSize: 16, color: Colors.green),
+                ),
+                Text(
+                  "Color: $colorName2",
+                  style: const TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 10),
                 Text(

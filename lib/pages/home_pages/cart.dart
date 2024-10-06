@@ -1,4 +1,5 @@
 import 'package:final_project/pages/constructer/product_constructer.dart';
+import 'package:final_project/pages/home_pages/circle_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'home_screen.dart';
@@ -82,6 +83,11 @@ class _CartState extends State<Cart> {
                                 "Rs. ${widget.cartProduct.price.toString()}",
                                 style: const TextStyle(
                                     fontSize: 16, color: Colors.green),
+                              ),
+                              Text(
+                                "Color: $colorName2",
+                                style: const TextStyle(
+                                    fontSize: 16),
                               ),
                               const SizedBox(height: 10),
                               const Text(
